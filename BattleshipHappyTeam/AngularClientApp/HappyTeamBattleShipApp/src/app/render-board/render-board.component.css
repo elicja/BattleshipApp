@@ -1,0 +1,23 @@
+.Field{
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin:auto;
+    padding: 10px;
+    transition-duration: 600ms;
+    border: 5px solid black;
+    cursor: cell;
+}
+
+
+.notHittedField{
+    transition-delay: 200ms !important;
+}
+
+.notHittedField:hover{
+    background-color: red !important;
+    transition-delay: 10ms !important;
+    cursor: cell;
+    border: 6px dotted red;
+}

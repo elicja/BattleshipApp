@@ -1,0 +1,8 @@
+<h1 class="text-center">{{title}}</h1>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="board?.length">
+<tr *ngFor="let row of board; let rowIndex = index">
+    <td *ngFor="let cell of row; let colIndex = index">
+        <div [class]="getCssClass(cell)" class="Field" (click)="makeAMove(rowIndex,colIndex,cell)"></div>
+    </td>
+</tr>
+</table>

@@ -1,0 +1,11 @@
+.borderLess{
+    border: 0px;
+}
+
+.borderDashedLeft{
+    border-left: 5px dashed  royalblue;    
+}
+
+.borderDashedRight{
+    border-right: 5px dashed  royalblue;    
+}

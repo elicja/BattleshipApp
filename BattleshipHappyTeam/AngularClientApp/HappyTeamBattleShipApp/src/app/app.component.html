@@ -1,0 +1,49 @@
+<div *ngIf="!game?.gamePoints" style="display: flex; justify-content: center; align-items: center; height: 80vh">
+  <div class="col-4" >  
+    <h1 class="text-center">BATTLE SHIPS</h1>
+    
+    <button class="btn btn-success col-12" (click)="newGame()">Start a new Game</button>
+    <hr>
+    <div class="row">
+      <input #gameId type="text" class="col-6 borderLess" placeholder="Your game Id"/>
+      <button class="btn btn-success col-6 borderLess" (click)="loadGame(gameId.value)">Load Game</button>
+    </div> 
+</div>
+</div>
+
+
+<div id="container" *ngIf="game?.gamePoints">
+  <div class="row">
+    <h1 class="text-center col-12">Game Id:{{game.id}}</h1>
+    <button (click)="newGame()" class="btn btn text-danger" style="font-size: 50px;">| New Game |</button>
+  </div>
+  <br>
+  
+  <div *ngIf="isGameOver">
+    <h2 class="text-center text-danger">Game Over</h2>
+    <h2 class="text-center text-primary">{{game.player2Points>game.player1Points?"Player 2":"Player 1"}} Wins</h2>  
+  </div>
+  
+  <div class="row">  
+    <h5 class="col-6 text-center text-success">Player 1 points {{game.player1Points}}/{{game.gamePoints}}</h5>
+    <h5 class="col-6 text-center text-danger"> Player 2 points {{game.player2Points}}/{{game.gamePoints}}</h5>  
+  </div>  
+  <hr>
+  
+<div class="row " style="display: flex; justify-content: center; align-items: center;">
+  <div class="col-4 borderDashedRight">
+    <app-render-board title="Player 1" [board]="game.playerBoard" [canMove]="false"></app-render-board>
+  </div>
+  <div class="col-2"></div>
+  <div class="col-4 borderDashedLeft">
+    <app-render-board title="Player 2" [board]="game.playerHitBoard" (refreshEvent)="receiveData($event)" [canMove]="!isGameOver" [id]="game.id"></app-render-board>
+  </div>
+</div>  
+ 
+</div>
+
+
+
+
+ 
+ 
