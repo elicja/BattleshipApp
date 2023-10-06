@@ -1,60 +1,59 @@
 --------------------------------------------------
-Założenia gry
+Assumptions of the game
 --------------------------------------------------
 
-1. Każdy posiada pięć statków, których wymiary zajmują daną ilość pól (2, 3, 3, 4, 5).
-2. Przeciwnikiem jest komputer.
-4. Komputer wykonuje ruchy w sposób losowy.
-5. Gra kończy się gdy jeden z graczy zbije wszystkie statki (czyli łączna liczba punktów = 17).
+1. Everyone has five ships, the dimensions of which occupy a given number of fields (2, 3, 3, 4, 5).
+2. The opponent is a computer.
+4. The computer moves randomly.
+5. The game ends when one of the players captures all ships (i.e. total number of points = 17).
 
 
 --------------------------------------------------
-Projekt - ogólne założenia
+Project - general assumptions
 --------------------------------------------------
 
-Projekt składa się z dwóch aplikacji - aplikacji serwerowej oraz klienckiej
+The project consists of two applications - a server application and a client application.
 
-Użytkownik może stworzyć nową grę oraz wczytać już istniejącą, jeśli zna jej id.
-Użytkownik może bez problemu zacząć nową grę.
+The user can create a new game and load an existing one if he knows its id.
+The user can start a new game without any problems.
 
-Przebieg gry jest na bieżąco zapisywany w bazie danych.
+The course of the game is continuously saved in the database.
 
 --------------------------------------------------
-Aplikacja po stronie C# - najważniejsze informacje
+C# application - the most important information
 --------------------------------------------------
 
-Aplikacja składa się z dwóch projektów. 
-BattleShipLibrary odpowiada za modele, dostęp do bazy danych i logikę rozgrywki oraz 
-BattleshipHappyTeamApi, czyli projekt API, który obsługuje trzy zapytania:
+The application consists of two projects.
+BattleShipLibrary is responsible for models, database access and gameplay logic and
+BattleshipHappyTeamApi, an API project that supports three queries:
 
-1. Zapytanie GET api/Battleship/game/{id}, które zwraca obiekt GameDataModelApi z danymi gry na podstawie otrzymanego id.   
-2. Zapytanie POST api/Battleship/game/, które tworzy nowy obiekt gry, dodaje go do bazy danych, a następnie zwraca dane gry jako obiekt GameDataModelApi.
-3. Zapytanie POST api/Battleship/game/{id}, które służy do oddawania strzału przez gracza.
+1. GET api/Battleship/game/{id} query, which returns a GameDataModelApi object with game data based on the received id.   
+2. POST api/Battleship/game/ query, which creates a new game object, adds it to the database and then returns the game data as a GameDataModelApi object.
+3. POST api/Battleship/game/{id} query, which is used for the player to take a shot.
 
-W BattleShipLibrary/Models powstały trzy modele:
-1. GameDataModelDto - model używany w providerze.
-2. GameDataModelDb - model bazodanowy.
-3. GameDataModelApi - model zwracany przez Api.
+Three models were created in BattleShipLibrary/Models:
+1. GameDataModelDto - model used in the provider.
+2. GameDataModelDb - database model.
+3. GameDataModelApi - model returned by Api.
 
-Dostęp do danych odbywa się przy wykorzystaniu Entity Framework Core.
-Złożone dane (np. kolekcje) obiektów dto/db są Serializowane/Deserializowane podczas pracy z bazą danych.
-
+Data is accessed by using Entity Framework Core.
+Complex data (e.g. collections) of dto/db objects are serialized/deserialized while working with the database.
 
 ---------------------------------------------------------
-Aplikacja po stronie Angular'a - najważniejsze informacje
+Angular application - the most important information
 ---------------------------------------------------------
 
-Aplikacja składa się z serwisu api.service, który odpowiada za wysyłanie zapytań HTTP.
-  *W app/services/api.service.ts należy podać dla wartości 'private baseUrl' link do API.
+The application consists of the api.service website, which is responsible for sending HTTP requests.
+  *In app/services/api.service.ts you must provide a link to the API for the 'private baseUrl' value.
 
-Komponentu Render-board, odpowiadającego za pokazywanie planszy gry.
+The Render-board component, responsible for showing the game board.
 
-Komponentu głównego app.component, odpowiadającego za pozostałą część logiki aplikacji.
+The main component app.component, responsible for the rest of the application logic.
 
 ---------------------------------------------------------
-Dodatkowe informacje
+Additional information
 ---------------------------------------------------------
 
-Pliki aplikacji angular znajdują się w folderze BattleshipHappyTeam/AngularClientApp/HappyTeamBattleShipApp.
+The angular application files are located in the BattleshipHappyTeam/AngularClientApp/HappyTeamBattleShipApp folder.
 
-Głównym projektem aplikacji serwerowej jest projekt BattleshipHappyTeamApi.
+The main project of the server application is the BattleshipHappyTeamApi project.
